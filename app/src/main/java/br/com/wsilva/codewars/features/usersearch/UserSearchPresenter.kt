@@ -32,13 +32,15 @@ class UserSearchPresenter: UserSearchContract.Presenter {
     }
 
     override fun onCreate() {
-        Observable.create<Long>{ item ->
+        val observable = Observable.create<Long>{ item ->
             item.onNext(repository.insert(UserEntity(username = "Wellington", clan = "was",
                 honor = 10, leaderboardPosition = 11, name = "wsilva")))
         }
             .observeOn(schedulers.ui())
             .subscribeOn(schedulers.io())
-            .subscribe { id -> Log.d("### ", id.toString()) }
 
+        bag.add(
+            observable.subscribe { id -> Log.d("### ", id.toString()) }
+        )
     }
 }
