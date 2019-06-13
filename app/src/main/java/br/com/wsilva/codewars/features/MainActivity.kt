@@ -1,7 +1,8 @@
-package br.com.wsilva.codewars
+package br.com.wsilva.codewars.features
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import br.com.wsilva.codewars.R
 
 class MainActivity : AppCompatActivity() {
 

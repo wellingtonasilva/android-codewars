@@ -1,8 +1,9 @@
 package br.com.wsilva.wmc.core
 
+import br.com.wsilva.codewars.core.BasicDAO
 import io.reactivex.Flowable
 
-abstract class BasicRepository<T> {
+abstract class BasicRepository<T>(private val dao: BasicDAO<T>) {
     abstract fun listAll() : Flowable<List<T>>
     abstract fun get(id : Long) : T
     abstract fun delete(entity : T) : Int
