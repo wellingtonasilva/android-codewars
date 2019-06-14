@@ -1,11 +1,10 @@
 package br.com.wsilva.codewars.features.usersearch
 
-import android.util.Log
+import br.com.wsilva.codewars.constants.AppConstants
 import br.com.wsilva.codewars.di.AppSchedulers
-import br.com.wsilva.codewars.model.entity.UserEntity
+import br.com.wsilva.codewars.model.dto.UserDTO
 import br.com.wsilva.codewars.model.repository.UserRepository
 import br.com.wsilva.codewars.sevice.rest.RestApi
-import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -32,15 +31,37 @@ class UserSearchPresenter: UserSearchContract.Presenter {
     }
 
     override fun onCreate() {
-        val observable = Observable.create<Long>{ item ->
-            item.onNext(repository.insert(UserEntity(username = "Wellington", clan = "was",
-                honor = 10, leaderboardPosition = 11, name = "wsilva")))
-        }
+    }
+
+    override fun onQueryTextSubmit(query: String) {
+        bag.add(
+            api.getUser(query,AppConstants.API_KEY)
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe({result -> onSuccess(result)},
+                    {error -> onError(error.message ?: "Unknow error.")})
+        )
+
+    }
+
+    override fun onError(error: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onSuccess(result: UserDTO) {
+        bag.add(
+            repository.save(result)
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe {result -> loadUser()}
+        )
+    }
+
+    override fun loadUser() {
+        repository
+            .listAll()
             .observeOn(schedulers.ui())
             .subscribeOn(schedulers.io())
-
-        bag.add(
-            observable.subscribe { id -> Log.d("### ", id.toString()) }
-        )
+            .subscribe { view.showNoResult(false); view.showList(it) }
     }
 }

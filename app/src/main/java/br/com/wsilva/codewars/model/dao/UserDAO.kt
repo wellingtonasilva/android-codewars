@@ -8,11 +8,14 @@ import io.reactivex.Flowable
 @Dao
 interface UserDAO: BasicDAO<UserEntity> {
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM user ORDER BY _id DESC")
     override fun listAll(): Flowable<List<UserEntity>>
 
     @Query("SELECT * FROM user WHERE _id = :id")
     override fun get(id: Long): UserEntity
+
+    @Query("SELECT * FROM user WHERE username = :username")
+    fun getByUsername(username: String): UserEntity
 
     @Delete
     override fun delete(entity: UserEntity): Int
