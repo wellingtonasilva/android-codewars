@@ -26,9 +26,9 @@ class UserSearchAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
         val entity = list[position]
-        holder.txtBestLanguage.text = "txtBestLanguage"
         holder.txtName.text = entity.username
-        holder.txtRank.text = entity.leaderboardPosition.toString()
+        holder.txtRank.text = context.getString(R.string.app_user_rank, entity.leaderboardPosition)
+        holder.txtBestLanguage.text = context.getString(R.string.app_user_best_language, entity.leaderboardPosition)
         holder.card_view.setOnClickListener { listener.OnClickListener(entity) }
     }
 

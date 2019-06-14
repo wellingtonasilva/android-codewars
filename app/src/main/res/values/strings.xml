@@ -2,6 +2,8 @@
     <string name="app_name">Codewars</string>
     <string name="app_pesquisar">Pesquisar</string>
     <string name="app_user_name">Name</string>
-    <string name="app_user_rank">Rank</string>
-    <string name="app_user_best_language">Best language</string>
+    <string name="app_user_rank">Rank: #%1$d</string>
+    <string name="app_user_best_language">Best language: %1$d</string>
+    <string name="app_order_by_rank">Order by Rank</string>
+    <string name="app_order_by_time">Order by Time of Look up</string>
 </resources>

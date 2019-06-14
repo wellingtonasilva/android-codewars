@@ -8,4 +8,14 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"
         />
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/action_order_rank"
+              android:title="@string/app_order_by_rank"
+              app:showAsAction="never"
+        />
+        <item android:id="@+id/action_order_time"
+              android:title="@string/app_order_by_time"
+              app:showAsAction="never"
+        />
+    </group>
 </menu>

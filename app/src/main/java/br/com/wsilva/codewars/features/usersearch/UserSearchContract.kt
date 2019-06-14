@@ -15,5 +15,7 @@ interface UserSearchContract {
         fun onError(error: String)
         fun onSuccess(result: UserDTO)
         fun loadUser()
+        fun orderByRank()
+        fun orderByTimeOfLookUp()
     }
 }

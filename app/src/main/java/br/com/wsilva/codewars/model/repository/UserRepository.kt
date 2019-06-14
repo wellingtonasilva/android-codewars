@@ -10,6 +10,8 @@ import io.reactivex.Single
 class UserRepository(private val dao: UserDAO): BasicRepository<UserEntity>(dao) {
 
     override fun listAll(): Flowable<List<UserEntity>> = dao.listAll()
+    fun listAllOrderByRank(): Flowable<List<UserEntity>> = dao.listAllOrderByRank()
+    fun listAllOrderByTimeOfLookUp(): Flowable<List<UserEntity>> = dao.listAllOrderByTimeOfLookUp()
     override fun get(id: Long): UserEntity = dao.get(id)
     fun getByUsername(username: String): UserEntity = dao.getByUsername(username)
     override fun delete(entity: UserEntity): Int = dao.delete(entity)

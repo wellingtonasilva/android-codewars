@@ -58,10 +58,32 @@ class UserSearchPresenter: UserSearchContract.Presenter {
     }
 
     override fun loadUser() {
-        repository
-            .listAll()
-            .observeOn(schedulers.ui())
-            .subscribeOn(schedulers.io())
-            .subscribe { view.showNoResult(false); view.showList(it) }
+        bag.add(
+            repository
+                .listAll()
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe { view.showNoResult(false); view.showList(it) }
+        )
+    }
+
+    override fun orderByRank() {
+        bag.add(
+            repository
+                .listAllOrderByRank()
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe { view.showNoResult(false); view.showList(it) }
+        )
+    }
+
+    override fun orderByTimeOfLookUp() {
+        bag.add(
+            repository
+                .listAllOrderByTimeOfLookUp()
+                .observeOn(schedulers.ui())
+                .subscribeOn(schedulers.io())
+                .subscribe { view.showNoResult(false); view.showList(it) }
+        )
     }
 }

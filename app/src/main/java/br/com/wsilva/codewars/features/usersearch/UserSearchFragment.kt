@@ -62,6 +62,22 @@ class UserSearchFragment: Fragment(), UserSearchContract.View {
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_order_rank -> {
+                item.isChecked = true
+                presenter.orderByRank()
+                return true
+            }
+            R.id.action_order_time -> {
+                item.isChecked = true
+                presenter.orderByTimeOfLookUp()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         presenter.loadUser()
