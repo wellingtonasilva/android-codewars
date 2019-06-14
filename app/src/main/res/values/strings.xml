@@ -6,4 +6,8 @@
     <string name="app_user_best_language">Best language: %1$d</string>
     <string name="app_order_by_rank">Order by Rank</string>
     <string name="app_order_by_time">Order by Time of Look up</string>
+    <string name="app_user_detail">User Detail</string>
+    <string name="app_home">Home</string>
+    <string name="app_completed">Completed</string>
+    <string name="app_authored">Authored</string>
 </resources>

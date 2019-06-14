@@ -8,6 +8,7 @@ interface UserSearchContract {
     interface View {
         fun showNoResult(display: Boolean)
         fun showList(list: List<UserEntity>)
+        fun showUserDetail(id: Long)
     }
 
     interface Presenter: BasicPresenter {

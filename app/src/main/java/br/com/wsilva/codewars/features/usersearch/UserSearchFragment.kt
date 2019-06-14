@@ -1,5 +1,6 @@
 package br.com.wsilva.codewars.features.usersearch
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.MenuItemCompat
@@ -7,10 +8,11 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.*
-import android.widget.Toast
 import br.com.wsilva.codewars.AppApplication
 import br.com.wsilva.codewars.R
+import br.com.wsilva.codewars.constants.AppConstants
 import br.com.wsilva.codewars.di.AppModule
+import br.com.wsilva.codewars.features.userdetail.principal.UserDetailPrincipalActivity
 import br.com.wsilva.codewars.features.usersearch.di.DaggerUserSearchComponent
 import br.com.wsilva.codewars.features.usersearch.di.UserSearchModule
 import br.com.wsilva.codewars.model.entity.UserEntity
@@ -102,12 +104,20 @@ class UserSearchFragment: Fragment(), UserSearchContract.View {
     override fun showList(list: List<UserEntity>) {
         val adapter = UserSearchAdapter(activity!!, list, object: UserSearchAdapter.UserSearchAdapterListener {
             override fun OnClickListener(user: UserEntity) {
-                Toast.makeText(context, user.username, Toast.LENGTH_SHORT).show()
+                showUserDetail(user.id)
             }
         })
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = adapter
+    }
+
+    override fun showUserDetail(id: Long) {
+        val intent = Intent(context, UserDetailPrincipalActivity::class.java)
+        val bundle = Bundle()
+        bundle.putLong(AppConstants.KEY_USER_ID, id)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }

@@ -18,7 +18,7 @@ class UserRepository(private val dao: UserDAO): BasicRepository<UserEntity>(dao)
     override fun insert(entity: UserEntity): Long = dao.insert(entity)
     override fun update(entity: UserEntity): Int = dao.update(entity)
 
-    fun save(userDTO: UserDTO): Single<Boolean> {
+    fun save(userDTO: UserDTO): Single<UserDTO> {
         return Single.create {it
             try {
                 // Exist in the local database
@@ -29,13 +29,17 @@ class UserRepository(private val dao: UserDAO): BasicRepository<UserEntity>(dao)
                     entity = UserEntity(username = userDTO.username, name = userDTO.name,
                         leaderboardPosition = userDTO.leaderboardPosition, honor = userDTO.honor,
                         clan = userDTO.clan)
-                    it.onSuccess(insert(entity) > 0)
+                    val id = insert(entity)
+                    userDTO.id = id
+                    it.onSuccess(userDTO)
                 } else {
                     entity.clan = userDTO.clan
                     entity.honor = userDTO.honor
                     entity.leaderboardPosition = userDTO.leaderboardPosition
                     entity.name = userDTO.name
-                    it.onSuccess(update(entity) > 0)
+                    update(entity)
+                    userDTO.id = entity.id
+                    it.onSuccess(userDTO)
                 }
             } catch (e: Exception) {
                 it.onError(e)

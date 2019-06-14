@@ -1,6 +1,7 @@
 package br.com.wsilva.codewars.model.dto
 
 data class UserDTO (
+    var id: Long = 0,
     val username: String,
     val name: String,
     val honor: Int,
