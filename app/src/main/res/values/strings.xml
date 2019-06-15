@@ -13,4 +13,16 @@
     <string name="app_detail_home">Home</string>
     <string name="app_detail_completed">Completed</string>
     <string name="app_detail_authored">Authored</string>
+    <string name="app_user_clan">Clan</string>
+    <string name="app_user_skills">Skills</string>
+    <string name="app_progress">Progress</string>
+    <string name="app_rank">Rank</string>
+    <string name="app_honor">Honor</string>
+    <string name="app_leaderboard_position">Leaderboard Position</string>
+    <string name="app_languages">Languages</string>
+    <string name="app_total_languages_trained">Total Languages Trained</string>
+    <string name="app_highest_trained">Highest Trained</string>
+    <string name="app_most_recent">Most Recent</string>
+    <string name="app_language_name">Language Name</string>
+    <string name="app_score">Score: %1$d</string>
 </resources>

@@ -1,6 +1,5 @@
 package br.com.wsilva.codewars.model.repository
 
-import android.util.Log
 import br.com.wsilva.codewars.model.dao.UserLanguagesDAO
 import br.com.wsilva.codewars.model.dto.RankDTO
 import br.com.wsilva.codewars.model.dto.RanksDTO
@@ -12,8 +11,9 @@ import io.reactivex.Single
 class UserLanguagesRepository(private val dao: UserLanguagesDAO): BasicRepository<UserLanguagesEntity>(dao) {
 
     override fun listAll(): Flowable<List<UserLanguagesEntity>> = dao.listAll()
+    fun listAllByUserId(userId: Long): Flowable<List<UserLanguagesEntity>> = dao.listAllByUserId(userId)
     override fun get(id: Long): UserLanguagesEntity = dao.get(id)
-    fun getByLanguage(language: String): UserLanguagesEntity = dao.getByLanguage(language)
+    fun getByLanguage(userId: Long, language: String): UserLanguagesEntity = dao.getByLanguage(userId, language)
     override fun delete(entity: UserLanguagesEntity): Int = dao.delete(entity)
     override fun insert(entity: UserLanguagesEntity): Long = dao.insert(entity)
     override fun update(entity: UserLanguagesEntity): Int = dao.update(entity)
@@ -32,7 +32,7 @@ class UserLanguagesRepository(private val dao: UserLanguagesDAO): BasicRepositor
     }
 
     fun save(userId: Long, language: String, rankDTO: RankDTO) {
-        var entity = getByLanguage(language)
+        var entity = getByLanguage(userId, language)
 
         if (entity == null) {
             entity = UserLanguagesEntity(userId = userId, name = rankDTO.name, color = rankDTO.color,

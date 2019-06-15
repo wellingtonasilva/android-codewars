@@ -11,11 +11,14 @@ interface UserLanguagesDAO: BasicDAO<UserLanguagesEntity> {
     @Query("SELECT * FROM user_languages")
     override fun listAll(): Flowable<List<UserLanguagesEntity>>
 
+    @Query("SELECT * FROM user_languages WHERE user_id = :userId")
+    fun listAllByUserId(userId: Long): Flowable<List<UserLanguagesEntity>>
+
     @Query("SELECT * FROM user_languages WHERE _id = :id")
     override fun get(id: Long): UserLanguagesEntity
 
-    @Query("SELECT * FROM user_languages WHERE language = :language")
-    fun getByLanguage(language: String): UserLanguagesEntity
+    @Query("SELECT * FROM user_languages WHERE user_id = :userId AND language = :language")
+    fun getByLanguage(userId: Long, language: String): UserLanguagesEntity
 
     @Delete
     override fun delete(entity: UserLanguagesEntity): Int

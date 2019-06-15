@@ -35,7 +35,7 @@ class UserDetailPrincipalFragment: Fragment() {
         val view = inflater?.inflate(R.layout.lay_user_detail_principal_fragment, container, false)
 
         //Lista de Páginas a serem exibidas
-        mListPagerAdapter = UserDetailPrincipalStatePagerAdapter(fragmentManager!!)
+        mListPagerAdapter = UserDetailPrincipalStatePagerAdapter(fragmentManager!!, arguments!!)
 
         //ViewPage
         mViewPager = view?.findViewById<ViewPager>(R.id.viewPager)!!

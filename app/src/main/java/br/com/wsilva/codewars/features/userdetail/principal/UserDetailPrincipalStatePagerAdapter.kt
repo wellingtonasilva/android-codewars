@@ -1,5 +1,6 @@
 package br.com.wsilva.codewars.features.userdetail.principal
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -7,7 +8,7 @@ import br.com.wsilva.codewars.features.userdetail.challenges.authored.UserDetail
 import br.com.wsilva.codewars.features.userdetail.challenges.completed.UserDetailCompletedFragment
 import br.com.wsilva.codewars.features.userdetail.home.UserDetailHomeFragment
 
-class UserDetailPrincipalStatePagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm)
+class UserDetailPrincipalStatePagerAdapter(fm: FragmentManager, private val bundle: Bundle): FragmentStatePagerAdapter(fm)
 {
     companion object {
         val PAGE_HOME           = 0
@@ -17,12 +18,14 @@ class UserDetailPrincipalStatePagerAdapter(fm: FragmentManager): FragmentStatePa
 
     override fun getItem(position: Int): Fragment {
         var fragment = Fragment()
+
         when (position)
         {
             PAGE_HOME       -> fragment = UserDetailHomeFragment.newInstance()
             PAGE_COMPLETED  -> fragment = UserDetailCompletedFragment.newInstance()
             PAGE_AUTHORED   -> fragment = UserDetailAuthoredFragment.newInstance()
         }
+        fragment.arguments = bundle
 
         return fragment
     }
