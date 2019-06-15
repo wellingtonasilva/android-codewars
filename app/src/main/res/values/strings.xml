@@ -10,4 +10,7 @@
     <string name="app_home">Home</string>
     <string name="app_completed">Completed</string>
     <string name="app_authored">Authored</string>
+    <string name="app_detail_home">Home</string>
+    <string name="app_detail_completed">Completed</string>
+    <string name="app_detail_authored">Authored</string>
 </resources>

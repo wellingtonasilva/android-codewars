@@ -15,8 +15,7 @@ class UserDetailPrincipalStatePagerAdapter(fm: FragmentManager): FragmentStatePa
         val PAGE_AUTHORED       = 2
     }
 
-    override fun getItem(position: Int): Fragment
-    {
+    override fun getItem(position: Int): Fragment {
         var fragment = Fragment()
         when (position)
         {
@@ -28,8 +27,7 @@ class UserDetailPrincipalStatePagerAdapter(fm: FragmentManager): FragmentStatePa
         return fragment
     }
 
-    override fun getCount(): Int
-    {
+    override fun getCount(): Int {
         return 3
     }
 }
