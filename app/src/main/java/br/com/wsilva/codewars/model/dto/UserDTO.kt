@@ -7,9 +7,9 @@ data class UserDTO (
     val honor: Int,
     val clan: String,
     val leaderboardPosition: Int,
-    val skills: List<String>?,
-    val ranks: RanksDTO?,
-    val codeChallenges: CodeChallengesDTO?,
+    val skills: List<String>,
+    val ranks: RanksDTO,
+    val codeChallenges: CodeChallengesDTO,
     val success: Boolean?,
     val reason: String?
 )

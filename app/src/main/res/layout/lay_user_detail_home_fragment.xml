@@ -13,18 +13,26 @@
                 android:text="@string/app_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblName" android:layout_marginTop="32dp"
+                android:id="@+id/lblUsername" android:layout_marginTop="32dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"/>
         <TextView
+                android:text="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblName" android:layout_marginTop="16dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintTop_toBottomOf="@+id/lblUsername"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"/>
+        <TextView
                 android:text="@string/app_user_clan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblClan" android:layout_marginTop="16dp"
+                android:id="@+id/lblClan"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                app:layout_constraintTop_toBottomOf="@+id/lblName"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"/>
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/lblName" android:layout_marginTop="8dp"/>
         <TextView
                 android:text="@string/app_user_skills"
                 android:layout_width="wrap_content"
@@ -52,51 +60,37 @@
                 android:text="@string/app_honor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView5" android:layout_marginTop="8dp"
+                android:id="@+id/lblHonor" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/lblRank" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"/>
         <TextView
                 android:text="@string/app_leaderboard_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView6" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/lblLeaderboardPosition" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/lblHonor" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"/>
         <TextView
                 android:text="@string/app_languages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView7" android:layout_marginTop="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblLeaderboardPosition" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp" android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
         <TextView
                 android:text="@string/app_total_languages_trained"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8" android:layout_marginTop="16dp"
+                android:id="@+id/lblTotalLanguagesTrained" android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"/>
         <TextView
                 android:text="@string/app_highest_trained"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView9" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/lblHighestTrained" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/lblTotalLanguagesTrained" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"/>
-        <TextView
-                android:text="@string/app_most_recent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView10" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="24dp"/>
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="400dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/textView10"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

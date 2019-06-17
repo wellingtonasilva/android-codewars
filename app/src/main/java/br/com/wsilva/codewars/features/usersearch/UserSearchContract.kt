@@ -6,9 +6,10 @@ import br.com.wsilva.codewars.model.entity.UserEntity
 
 interface UserSearchContract {
     interface View {
+        fun showResult()
         fun showNoResult(display: Boolean)
         fun showList(list: List<UserEntity>)
-        fun showUserDetail(id: Long)
+        fun showUserDetail(id: Long, username: String)
     }
 
     interface Presenter: BasicPresenter {

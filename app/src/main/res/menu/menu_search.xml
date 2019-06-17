@@ -16,6 +16,7 @@
         <item android:id="@+id/action_order_time"
               android:title="@string/app_order_by_time"
               app:showAsAction="never"
+              android:checked="true"
         />
     </group>
 </menu>

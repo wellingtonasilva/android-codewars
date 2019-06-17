@@ -101,10 +101,14 @@ class UserSearchFragment: Fragment(), UserSearchContract.View {
         recyclerView.visibility = if (display) View.INVISIBLE else View.VISIBLE
     }
 
+    override fun showResult() {
+
+    }
+
     override fun showList(list: List<UserEntity>) {
         val adapter = UserSearchAdapter(activity!!, list, object: UserSearchAdapter.UserSearchAdapterListener {
             override fun OnClickListener(user: UserEntity) {
-                showUserDetail(user.id)
+                showUserDetail(user.id, user.username)
             }
         })
         recyclerView.setHasFixedSize(true)
@@ -113,10 +117,11 @@ class UserSearchFragment: Fragment(), UserSearchContract.View {
         recyclerView.adapter = adapter
     }
 
-    override fun showUserDetail(id: Long) {
+    override fun showUserDetail(id: Long, username: String) {
         val intent = Intent(context, UserDetailPrincipalActivity::class.java)
         val bundle = Bundle()
         bundle.putLong(AppConstants.KEY_USER_ID, id)
+        bundle.putString(AppConstants.KEY_USER_NAME, username)
         intent.putExtras(bundle)
         startActivity(intent)
     }

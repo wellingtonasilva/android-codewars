@@ -2,9 +2,11 @@ package br.com.wsilva.codewars.di
 
 import android.app.Application
 import android.arch.persistence.room.Room
+import br.com.wsilva.codewars.model.dao.UserChallengeDAO
 import br.com.wsilva.codewars.model.dao.UserDAO
 import br.com.wsilva.codewars.model.dao.UserLanguagesDAO
 import br.com.wsilva.codewars.model.db.AppDatabase
+import br.com.wsilva.codewars.model.repository.UserChallengeRepository
 import br.com.wsilva.codewars.model.repository.UserLanguagesRepository
 import br.com.wsilva.codewars.model.repository.UserRepository
 import dagger.Module
@@ -39,5 +41,15 @@ class AppDatabaseModule {
     @Provides
     fun providesUserLanguagesRepository(userLanguagesDAO: UserLanguagesDAO): UserLanguagesRepository {
         return UserLanguagesRepository(userLanguagesDAO)
+    }
+
+    @Provides
+    fun providesUserChallengeDAO(appDatabase: AppDatabase): UserChallengeDAO {
+        return appDatabase.getUserChallengeDAO()
+    }
+
+    @Provides
+    fun providesUserChallengeRepository(userChallengeDAO: UserChallengeDAO): UserChallengeRepository {
+        return UserChallengeRepository(userChallengeDAO)
     }
 }

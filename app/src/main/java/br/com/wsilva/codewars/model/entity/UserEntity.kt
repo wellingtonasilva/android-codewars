@@ -10,7 +10,17 @@ data class UserEntity(
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "honor") var honor: Int,
     @ColumnInfo(name = "clan") var clan: String,
-    @ColumnInfo(name = "leaderboardPosition") var leaderboardPosition: Int
+    @ColumnInfo(name = "leaderboardPosition") var leaderboardPosition: Int,
+    @ColumnInfo(name = "overall_rank") var overallRank: Int,
+    @ColumnInfo(name = "overall_name") var overallName: String,
+    @ColumnInfo(name = "overall_color") var overallColor: String,
+    @ColumnInfo(name = "overall_score") var overallScore: Int,
+    @ColumnInfo(name = "total_authored") var totalAuthored: Int,
+    @ColumnInfo(name = "total_completed") var totalCompleted: Int,
+    @ColumnInfo(name = "skills") var skills: String,
+    @ColumnInfo(name = "total_languages_trained") var totalLanguagesTrained: Int,
+    @ColumnInfo(name = "highest_trained") var highestTrained: String
+
 ) {
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)

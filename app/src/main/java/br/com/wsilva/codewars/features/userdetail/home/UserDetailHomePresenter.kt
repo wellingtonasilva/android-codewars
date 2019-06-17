@@ -1,8 +1,10 @@
 package br.com.wsilva.codewars.features.userdetail.home
 
 import br.com.wsilva.codewars.di.AppSchedulers
+import br.com.wsilva.codewars.model.entity.UserEntity
 import br.com.wsilva.codewars.model.repository.UserLanguagesRepository
 import br.com.wsilva.codewars.model.repository.UserRepository
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -33,13 +35,12 @@ class UserDetailHomePresenter: UserDetailHomeContract.Presenter {
     override fun onDestroy() {
     }
 
-    override fun loadLanguages(userId: Long) {
-        bag.add(
-            userLanguagesRepository
-                .listAllByUserId(userId)
+    override fun loadUser(userId: Long) {
+        bag.add (
+            Single.create<UserEntity> { it.onSuccess(userRepository.get(userId)) }
                 .observeOn(schedulers.ui())
                 .subscribeOn(schedulers.io())
-                .subscribe { result -> view.showLanguages(result) }
+                .subscribe { result -> view.showUser(result) }
         )
     }
 }

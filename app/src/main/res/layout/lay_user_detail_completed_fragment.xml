@@ -8,20 +8,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
     >
-        <TextView
-                android:id="@+id/txtMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:visibility="visible"
-                android:text="@string/app_detail_completed"
-                android:textSize="14sp" android:textAlignment="center" android:gravity="center"/>
+
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="gone"
+                android:visibility="visible"
         >
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>

@@ -6,6 +6,7 @@ import br.com.wsilva.codewars.model.dto.UserDTO
 import br.com.wsilva.codewars.model.repository.UserLanguagesRepository
 import br.com.wsilva.codewars.model.repository.UserRepository
 import br.com.wsilva.codewars.sevice.rest.RestApi
+import br.com.wsilva.codewars.util.UserOrderBy
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -17,6 +18,7 @@ class UserSearchPresenter: UserSearchContract.Presenter {
     private val userLanguagesRepository: UserLanguagesRepository
     private val bag: CompositeDisposable
     private val schedulers: AppSchedulers
+    val orderBy = UserOrderBy.BY_TIME
 
     @Inject
     constructor(view: UserSearchContract.View, repository: UserRepository,
@@ -51,7 +53,6 @@ class UserSearchPresenter: UserSearchContract.Presenter {
     }
 
     override fun onError(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onSuccess(result: UserDTO) {

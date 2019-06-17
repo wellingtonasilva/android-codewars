@@ -28,15 +28,31 @@ class UserRepository(private val dao: UserDAO): BasicRepository<UserEntity>(dao)
                 if (entity == null) {
                     entity = UserEntity(username = userDTO.username, name = userDTO.name,
                         leaderboardPosition = userDTO.leaderboardPosition, honor = userDTO.honor,
-                        clan = userDTO.clan)
+                        clan = userDTO.clan, overallColor = userDTO.ranks.overall.color,
+                        overallName = userDTO.ranks.overall.name, overallRank = userDTO.ranks.overall.rank,
+                        overallScore = userDTO.ranks.overall.score, totalAuthored = userDTO.codeChallenges.totalAuthored,
+                        totalCompleted = userDTO.codeChallenges.totalCompleted, skills = userDTO.skills.toString(),
+                        totalLanguagesTrained = getTotalLanguagesTrained(userDTO), highestTrained = getHighestTrained(userDTO))
                     val id = insert(entity)
                     userDTO.id = id
                     it.onSuccess(userDTO)
                 } else {
-                    entity.clan = userDTO.clan
-                    entity.honor = userDTO.honor
-                    entity.leaderboardPosition = userDTO.leaderboardPosition
-                    entity.name = userDTO.name
+                    with (entity) {
+                        clan = userDTO.clan
+                        honor = userDTO.honor
+                        leaderboardPosition = userDTO.leaderboardPosition
+                        name = userDTO.name
+                        overallColor = userDTO.ranks.overall.color
+                        overallName = userDTO.ranks.overall.name
+                        overallRank = userDTO.ranks.overall.rank
+                        overallScore = userDTO.ranks.overall.score
+                        totalAuthored = userDTO.codeChallenges.totalAuthored
+                        totalCompleted = userDTO.codeChallenges.totalCompleted
+                        skills = userDTO.skills.toString()
+                        totalLanguagesTrained = getTotalLanguagesTrained(userDTO)
+                        highestTrained = getHighestTrained(userDTO)
+                    }
+
                     update(entity)
                     userDTO.id = entity.id
                     it.onSuccess(userDTO)
@@ -45,5 +61,24 @@ class UserRepository(private val dao: UserDAO): BasicRepository<UserEntity>(dao)
                 it.onError(e)
             }
         }
+    }
+
+    fun getTotalLanguagesTrained(userDTO: UserDTO): Int {
+        userDTO.ranks.languages.also {
+            return it!!.size
+        }
+        return 0
+    }
+
+    fun getHighestTrained(userDTO: UserDTO): String {
+        var max = 0
+        var language = ""
+        userDTO.ranks.languages?.forEach { item ->
+            if (item.value.score > max) {
+                max = item.value.score
+                language =  "${item.key}(${item.value.name})"
+            }
+        }
+        return language
     }
 }

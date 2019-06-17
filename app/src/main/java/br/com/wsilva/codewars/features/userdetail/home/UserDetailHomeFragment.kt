@@ -2,17 +2,14 @@ package br.com.wsilva.codewars.features.userdetail.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
 import android.view.*
-import android.widget.Toast
 import br.com.wsilva.codewars.AppApplication
 import br.com.wsilva.codewars.R
 import br.com.wsilva.codewars.constants.AppConstants
 import br.com.wsilva.codewars.di.AppModule
 import br.com.wsilva.codewars.features.userdetail.home.di.DaggerUserDetailHomeComponent
 import br.com.wsilva.codewars.features.userdetail.home.di.UserDetailHomeModule
-import br.com.wsilva.codewars.model.entity.UserLanguagesEntity
+import br.com.wsilva.codewars.model.entity.UserEntity
 import kotlinx.android.synthetic.main.lay_user_detail_home_fragment.*
 import javax.inject.Inject
 
@@ -55,20 +52,25 @@ class UserDetailHomeFragment: Fragment(), UserDetailHomeContract.View {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.loadLanguages(presenter.userId)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putLong(AppConstants.KEY_USER_ID, presenter.userId)
+        super.onSaveInstanceState(outState)
     }
 
-    override fun showLanguages(list: List<UserLanguagesEntity>) {
-        val adapter = UserDetailHomeLanguageAdapter(activity!!, list, object: UserDetailHomeLanguageAdapter.UserDetailHomeLanguageAdapterListener {
-            override fun OnClickListener(userLanguagesEntity: UserLanguagesEntity) {
-                Toast.makeText(context, userLanguagesEntity.language, Toast.LENGTH_SHORT).show()
-            }
-        })
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.adapter = adapter
+    override fun onResume() {
+        super.onResume()
+        presenter.loadUser(presenter.userId)
+    }
+
+    override fun showUser(userEntity: UserEntity) {
+        lblUsername.text = userEntity.username
+        lblName.text = context!!.getString(R.string.app_name_user, userEntity.name)
+        lblClan.text = context!!.getString(R.string.app_user_clan, userEntity.clan)
+        lblSkills.text = context!!.getString(R.string.app_user_skills, userEntity.skills)
+        lblRank.text = context!!.getString(R.string.app_rank, userEntity.overallName)
+        lblHonor.text = context!!.getString(R.string.app_honor, userEntity.honor)
+        lblLeaderboardPosition.text = context!!.getString(R.string.app_leaderboard_position, userEntity.leaderboardPosition)
+        lblTotalLanguagesTrained.text = context!!.getString(R.string.app_total_languages_trained, userEntity.totalLanguagesTrained)
+        lblHighestTrained.text = context!!.getString(R.string.app_highest_trained, userEntity.highestTrained)
     }
 }
